@@ -32,9 +32,22 @@ services:
     networks:
       - mysql_network
 
+  redis-test:
+    image: redis:7.0
+    container_name: redis-test
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - mysql_network
+
 volumes:
   mysql_data:
   minio_data:
+  redis_data:
 
 networks:
   mysql_network:
